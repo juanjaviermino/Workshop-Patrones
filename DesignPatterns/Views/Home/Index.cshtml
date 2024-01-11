@@ -5,62 +5,72 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4 text-light mt-3 mb-0">Inventario de vehículos</h1>
+    <p class="mb-6">En este ejercicio se utilizan los patrones de diseño: Singleton, Builder y Factory</p>
     @if(!string.IsNullOrEmpty(ViewBag.ErrorMessage)) {
         @ViewBag.ErrorMessage
     }
-    <table class="table">
-        <thead>
-        <th>Id</th>
-        <th>Tipo</th>
-        <th>Marca</th>
-        <th>Modelo</th>
-        <th>Color</th>
-        <th>Gallons</th>
-        <th>Status</th>
-        <th>Actions</th>
-        </thead>
-        @foreach (var vehicle in Model.Vehicles)
-        {
-    <tr>
-        <td>
-            @vehicle.ID
-        </td>
-        <td>
-            @(vehicle.GetType().Name)
-        </td>
-        <td>
-            @vehicle.Brand
-        </td>
-        <td>
-            @vehicle.Model
-        </td>
-        <td>
-            @vehicle.Color
-        </td>
-        <td>
-            @vehicle.Gas.ToString("N1")
-        </td>
-        <td>
-            @(vehicle.IsEngineOn() ? "Encendido": "Apagado")
-        </td>
-        <td>
-            @if (vehicle.IsEngineOn())
-            {
-                <a href="/Home/StopEngine?id=@vehicle.ID">Stop Engine</a> }
-            else
-            {
-                <a href="/Home/StartEngine?id=@vehicle.ID">Start Engine</a>
-            }
+    <div class="table-max">
+        <table class="table">
+            <thead class="sticky-top">
+                <th class="text-light">Id</th>
+                <th class="text-light">Tipo</th>
+                <th class="text-light">Marca</th>
+                <th class="text-light">Modelo</th>
+                <th class="text-light">Año</th>
+                <th class="text-light">Color</th>
+                <th class="text-light">Gallons</th>
+                <th class="text-light">Status</th>
+                <th class="text-light">Actions</th>
+            </thead>
+            <tbody>
+                    @foreach (var vehicle in Model.Vehicles)
+                    {
+                    <tr class="table-light">
+                        <td>
+                                @vehicle.ID
+                        </td>
+                        <td>
+                                @(vehicle.GetType().Name)
+                        </td>
+                        <td>
+                                @vehicle.Brand
+                        </td>
+                        <td>
+                                @vehicle.Model
+                        </td>
+                        <td>
+                                @vehicle.Year
+                        </td>
+                        <td>
+                                @vehicle.Color
+                        </td>
+                        <td>
+                                @vehicle.Gas.ToString("N1")
+                        </td>
+                        <td>
+                                @(vehicle.IsEngineOn() ? "Encendido" : "Apagado")
+                        </td>
+                        <td>
+                                @if (vehicle.IsEngineOn())
+                                {
+                                <a class="btn btn-dark" href="/Home/StopEngine?id=@vehicle.ID">Stop Engine</a>
+                                }
+                                else
+                                {
+                                <a class="btn btn-dark" href="/Home/StartEngine?id=@vehicle.ID">Start Engine</a>
+                                }
 
-            <a href="/Home/AddGas?id=@vehicle.ID">LLenar tanque</a>
+                            <a class="btn btn-dark" href="/Home/AddGas?id=@vehicle.ID">LLenar tanque</a>
 
-        </td>
-    </tr>
-        }
-    </table>
+                        </td>
+                    </tr>
+                    }
+            </tbody>
+        </table>
+    </div>
 
-    <a href="/Home/AddMustang">Add Mustang</a>
-    <a href="/Home/AddExplorer">Add Explorer</a>
+    <a class="btn btn-primary m-2" href="/Home/AddMustang">Add Mustang</a>
+    <a class="btn btn-primary m-2" href="/Home/AddExplorer">Add Explorer</a>
+    <a class="btn btn-primary m-2" href="/Home/AddEscape">Add Escape</a>
 </div>

@@ -19,18 +19,20 @@ namespace DesignPatterns.Models
         public string Model { get; set; }
         public double Gas { get; set; }
         public double FuelLimit { get; set; }
+        public int Year { get; set; }
 
         #endregion
 
         #region Constructors
 
-        public Vehicle(string color, string brand, string model, double fuelLimit = 10)
+        public Vehicle(string color, string brand, string model, double fuelLimit = 10, int year = -1)
         {
             ID = Guid.NewGuid();
             Color = color;
             Brand = brand;
             Model = model;
             FuelLimit = fuelLimit;
+            Year = year == -1 ? DateTime.Now.Year : year;
         }
 
         #endregion

@@ -1,4 +1,6 @@
-﻿using DesignPatterns.Models;
+﻿using DesignPatterns.Factories;
+using DesignPatterns.ModelBuilders;
+using DesignPatterns.Models;
 using DesignPatterns.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -32,17 +34,32 @@ namespace DesignPatterns.Controllers
             return View(model);
         }
 
+        private void CreateVehicle(Creator creator)
+        {
+            _vehicleRepository.AddVehicle(creator.Create());
+        }
+
         [HttpGet]
         public IActionResult AddMustang()
         {
-            _vehicleRepository.AddVehicle(new Car("red","Ford","Mustang"));
+            var creator = new FordMustangCreator();
+            CreateVehicle(creator);
             return Redirect("/");
         }
 
         [HttpGet]
         public IActionResult AddExplorer()
         {
-            _vehicleRepository.AddVehicle(new Car("red", "Ford", "Explorer"));
+            var creator = new FordExplorerCreator();
+            CreateVehicle(creator);
+            return Redirect("/");
+        }
+
+        [HttpGet]
+        public IActionResult AddEscape()
+        {
+            var creator = new FordEscapeCreator();
+            CreateVehicle(creator);
             return Redirect("/");
         }
 
